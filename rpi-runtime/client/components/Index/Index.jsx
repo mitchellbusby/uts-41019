@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+var socket = require('socket.io-client')('http://localhost:3003');
+
 import RoomComponent from '../Room/Room';
 
 class IndexComponent extends Component {
@@ -12,7 +14,12 @@ class IndexComponent extends Component {
         AvailableRooms: props.AvailableRooms,
         DisplayIsOn: props.DisplayIsOn
     };
+  }
 
+  componentDidMount() {
+    socket.on('connect', () => console.log('connected'));
+    socket.on('send:arduino', this._receivePayloadFromArduino.bind(this));
+    socket.on('send:roomdata', this._receivePayloadFromRoomData.bind(this));
   }
 
   render() {
@@ -42,7 +49,7 @@ class IndexComponent extends Component {
       <section>
           <ul className={'rooms'}>
             { AvailableRooms.map((item,index) => {
-              return <RoomComponent key={index} />
+              return <RoomComponent key={index} {...item} />
             })}
           </ul>
           <div className={'indicator'}>
@@ -53,8 +60,16 @@ class IndexComponent extends Component {
 
   _receivePayloadFromArduino(payload) {
     // Update state from within here...
-    // it can be exploded into individual management items
+    // understanding can be exploded into individual management items
+    console.log(payload);
+  }
 
+  _receivePayloadFromRoomData(payload) {
+    // Update more state from within here...
+    console.log(payload);
+    this.setState({
+      AvailableRooms: payload.AvailableRooms
+    });
   }
 }
 
@@ -65,7 +80,7 @@ class IndexComponent extends Component {
 IndexComponent.defaultProps = {
   items: [],
   DisplayIsOn: true,
-  AvailableRooms: [{}, {}, {}],
+  AvailableRooms: [],
   CurrentPagePosition: 0,
 };
 

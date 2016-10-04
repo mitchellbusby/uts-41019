@@ -9,6 +9,26 @@ var app = express();
 var compress = require('compression');
 var layouts = require('express-ejs-layouts');
 
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+server.listen(3003);
+
+io.on('connection', function(socket) {
+  setTimeout(() => {
+    socket.emit('send:roomdata', {
+      AvailableRooms: [{PeopleCount: 30, Temperature: '23C', RoomName: 'CB11.04.11', Rank: 'Best', TimeFree: 30}]
+    });
+    socket.emit('send:arduino', {
+      slidingPotentiometer: 100
+    });
+  }, 3000);
+  setTimeout(() => {
+    socket.emit('send:arduino', {
+      slidingPotentiometer: 700
+    });
+  })
+});
+
 app.set('layout');
 app.set('view engine', 'ejs');
 app.set('view options', {layout: 'layout'});

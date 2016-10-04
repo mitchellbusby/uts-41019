@@ -43,6 +43,8 @@
     "express-ejs-layouts": "2.0.0",
     "react": "0.14.6",
     "react-dom": "0.14.6",
+    "socket.io": "1.4.8",
+    "socket.io-client": "1.4.8",
     "webpack": "1.12.12"
   },
   "devDependencies": {
