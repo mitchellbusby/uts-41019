@@ -12,7 +12,7 @@ class RoomComponent extends Component {
           <h3>{ RoomName }</h3>
           <p>
             <span>{ PeopleCount } people&nbsp;|&nbsp;</span>
-            <span>{timeFreePrettyPrint} hours free&nbsp;|&nbsp;</span>
+            <span>{timeFreePrettyPrint}&nbsp;|&nbsp;</span>
             <span>{ Temperature }</span>
           </p>
           <p>{ Rank }</p>
