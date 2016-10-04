@@ -16,7 +16,15 @@ server.listen(3003);
 io.on('connection', function(socket) {
   setTimeout(() => {
     socket.emit('send:roomdata', {
-      AvailableRooms: [{PeopleCount: 30, Temperature: '23C', RoomName: 'CB11.04.11', Rank: 'Best', TimeFree: 30}]
+      AvailableRooms: [{PeopleCount: 30, 
+        Temperature: '23C',
+        RoomName: 'CB11.04.11',
+        Rank: 'Best',
+        TimeFree: 30}, {
+          PeopleCount: 4,
+          Temperature: '26C',
+          RoomName: 'CB11.07.134',
+        }]
     });
     socket.emit('send:arduino', {
       slidingPotentiometer: 100
@@ -24,9 +32,9 @@ io.on('connection', function(socket) {
   }, 3000);
   setTimeout(() => {
     socket.emit('send:arduino', {
-      slidingPotentiometer: 700
+      slidingPotentiometer: 1700
     });
-  })
+  }, 8000);
 });
 
 app.set('layout');

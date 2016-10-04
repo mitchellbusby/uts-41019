@@ -4,6 +4,8 @@ var socket = require('socket.io-client')('http://localhost:3003');
 
 import RoomComponent from '../Room/Room';
 
+import { mapPotentiometerToPeopleThreshold } from '../../utils/Mappings';
+
 class IndexComponent extends Component {
   constructor(props) {
     //Get props and set state from them
@@ -12,7 +14,8 @@ class IndexComponent extends Component {
     this.state = {
         CurrentPagePosition: props.CurrentPagePosition,
         AvailableRooms: props.AvailableRooms,
-        DisplayIsOn: props.DisplayIsOn
+        DisplayIsOn: props.DisplayIsOn,
+        PotentiometerValue: props.PotentiometerValue,
     };
   }
 
@@ -23,10 +26,16 @@ class IndexComponent extends Component {
   }
 
   render() {
-    let { AvailableRooms, DisplayIsOn } = this.state;
+    let { AvailableRooms, DisplayIsOn, PotentiometerValue } = this.state;
     // TODO:
     // Filter available rooms in here! and then skip to
     // the current page
+
+    let threshold = mapPotentiometerToPeopleThreshold(PotentiometerValue);
+
+    AvailableRooms = AvailableRooms.filter(item => {
+      return item.PeopleCount <= threshold;
+    });
 
     if ( !DisplayIsOn ) {
       return (
@@ -62,6 +71,9 @@ class IndexComponent extends Component {
     // Update state from within here...
     // understanding can be exploded into individual management items
     console.log(payload);
+    this.setState({
+      PotentiometerValue: payload.slidingPotentiometer
+    });
   }
 
   _receivePayloadFromRoomData(payload) {
@@ -82,6 +94,7 @@ IndexComponent.defaultProps = {
   DisplayIsOn: true,
   AvailableRooms: [],
   CurrentPagePosition: 0,
+  PotentiometerValue: 0,
 };
 
 export default IndexComponent;
