@@ -1,6 +1,35 @@
-$background: lightblue;
-
 body {
-  background: $background;
   font-family: "Helvetica Neue", serif;
+}
+
+ul.rooms {
+  width: 85%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.indicator {
+  width: 10%;
+  background-color: grey;
+  height: 95vh;
+  padding: 0;
+}
+
+ul.rooms, .indicator {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 0;
+}
+
+
+.roomComponent {
+  height: 23vh;
+  margin-bottom: 1vh;
+  background-color: #FEFFC3;
+  list-style-type: none;
+  padding: 1.5em;
+
+  p {
+    color: #626262;
+  }
 }
