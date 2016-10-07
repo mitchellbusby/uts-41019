@@ -34,8 +34,10 @@
   },
   "homepage": "https://github.com/srn/react-webpack-boilerplate",
   "dependencies": {
+    "babel-plugin-transform-async-to-generator": "6.16.0",
     "babel-polyfill": "6.3.14",
     "babel-runtime": "6.3.19",
+    "bluebird": "3.4.6",
     "compression": "1.6.1",
     "cross-env": "1.0.7",
     "ejs": "2.4.1",
@@ -45,6 +47,7 @@
     "react-dom": "0.14.6",
     "socket.io": "1.4.8",
     "socket.io-client": "1.4.8",
+    "sqlite": "2.2.0",
     "webpack": "1.12.12"
   },
   "devDependencies": {
