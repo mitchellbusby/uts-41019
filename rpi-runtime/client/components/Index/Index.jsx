@@ -16,6 +16,9 @@ class IndexComponent extends Component {
         AvailableRooms: props.AvailableRooms,
         DisplayIsOn: props.DisplayIsOn,
         PotentiometerValue: props.PotentiometerValue,
+        ButtonIsPressed: props.ButtonIsPressed,
+        ButtonWasPressed: 0,
+        SortMechanism: props.SortMechanism,
     };
   }
 
@@ -26,7 +29,7 @@ class IndexComponent extends Component {
   }
 
   render() {
-    let { AvailableRooms, DisplayIsOn, PotentiometerValue } = this.state;
+    let { AvailableRooms, DisplayIsOn, PotentiometerValue, SortMechanism, ButtonIsPressed, ButtonWasPressed } = this.state;
     // TODO:
     // Filter available rooms in here! and then skip to
     // the current page
@@ -39,13 +42,24 @@ class IndexComponent extends Component {
 
     // Sort mechanism
     AvailableRooms = AvailableRooms.sort((a, b) => {
-      if (a.PeopleCount < b.PeopleCount) {
-        return -1;
+      if (SortMechanism == 0) {
+        if (a.PeopleCount < b.PeopleCount) {
+          return -1;
+        }
+        else if (a.PeopleCount > b.PeopleCount) {
+          return 1;
+        }
+        return 0;
       }
-      else if (a.PeopleCount > b.PeopleCount) {
-        return 1;
+      else {
+        if (a.TimeFree < b.TimeFree) {
+          return -1;
+        }
+        else if (a.TimeFree > b.TimeFree) {
+          return 1;
+        }
+        return 0;
       }
-      return 0;
     }).reverse();
 
     if ( !DisplayIsOn ) {
@@ -67,6 +81,7 @@ class IndexComponent extends Component {
 
     return (
       <section>
+          <p>Sorting mechanism: { SortMechanism } | ButtonIsPressed { ButtonIsPressed } | ButtonWasPressed { ButtonWasPressed } </p>
           <ul className={'rooms'}>
             { AvailableRooms.map((item,index) => {
               return <RoomComponent key={index} {...item} />
@@ -86,8 +101,11 @@ class IndexComponent extends Component {
     let payloadObj = JSON.parse(payload);
 
     this.setState({
-      PotentiometerValue: payloadObj.slidingPotentiometer
+      PotentiometerValue: payloadObj.slidingPotentiometer,
+      ButtonIsPressed: payloadObj.sortingButton,
     });
+
+    this._switchButtonState();
   }
 
   _receivePayloadFromRoomData(payload) {
@@ -95,6 +113,27 @@ class IndexComponent extends Component {
     this.setState({
       AvailableRooms: payload.AvailableRooms
     });
+  }
+
+  _switchButtonState() {
+    if (this.state.ButtonIsPressed == 1 && this.state.ButtonWasPressed == 0) {
+      this.setState({ButtonWasPressed: 1});
+    }
+    else if (this.state.ButtonIsPressed == 0 && this.state.ButtonWasPressed == 1) {
+      // Change the sort mechanism!!
+      this.setState({ButtonWasPressed: 0});
+      this._toggleSort();
+    }
+  }
+
+  _toggleSort() {
+    // Changes the sort mechanism
+    if (this.state.SortMechanism == 0) {
+      this.setState({SortMechanism: 1});
+    }
+    else {
+      this.setState({SortMechanism: 0});
+    }
   }
 }
 
@@ -108,6 +147,8 @@ IndexComponent.defaultProps = {
   AvailableRooms: [],
   CurrentPagePosition: 0,
   PotentiometerValue: 0,
+  ButtonIsPressed: 0,
+  SortMechanism: 0,
 };
 
 export default IndexComponent;

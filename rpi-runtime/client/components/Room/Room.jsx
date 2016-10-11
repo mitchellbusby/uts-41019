@@ -5,7 +5,7 @@ class RoomComponent extends Component {
     let { RoomName, PeopleCount, TimeFree, Temperature, Rank } = this.props;
 
     // TODO: better logic for this conversion
-    let timeFreePrettyPrint =  `${ Math.floor(TimeFree / 60) } hours free`;
+    let timeFreePrettyPrint =  `${ TimeFree } hours free`;
 
     return (
         <li className={'roomComponent'}>
@@ -15,7 +15,6 @@ class RoomComponent extends Component {
             <span>{timeFreePrettyPrint}&nbsp;|&nbsp;</span>
             <span>{ Temperature }</span>
           </p>
-          <p>{ Rank }</p>
         </li>
       )
   }
