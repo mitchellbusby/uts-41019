@@ -42,7 +42,7 @@ class IndexComponent extends Component {
 
     // Sort mechanism
     AvailableRooms = AvailableRooms.sort((a, b) => {
-      if (SortMechanism == 0) {
+      if (SortMechanism === 0) {
         if (a.PeopleCount < b.PeopleCount) {
           return -1;
         }
@@ -81,7 +81,7 @@ class IndexComponent extends Component {
 
     return (
       <section>
-          <p>Sorting mechanism: { SortMechanism } | ButtonIsPressed { ButtonIsPressed } | ButtonWasPressed { ButtonWasPressed } </p>
+          <p>Sorting mechanism: { SortMechanism === 0 ? 'By people count' : 'By time free' } | ButtonIsPressed { ButtonIsPressed } | ButtonWasPressed { ButtonWasPressed } </p>
           <ul className={'rooms'}>
             { AvailableRooms.map((item,index) => {
               return <RoomComponent key={index} {...item} />
