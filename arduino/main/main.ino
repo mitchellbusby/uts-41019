@@ -31,7 +31,7 @@ void loop(void) {
   root["ultrasonicRanger"] = readUltrasonicCentimeters();
   
   //Print JSON
-  root.prettyPrintTo(Serial);
+  root.printTo(Serial);
   Serial.println("");
   // Send data updates every quarter of a second
   delay(250);
@@ -39,10 +39,9 @@ void loop(void) {
 
 int readSlidingPotentiometer() {
     // This is commented out till we have a sliding potentiometer lol
-    /*int adcIn = 0;
+    int adcIn = 0;
     adcIn = analogRead(gspPort);
-    return adcIn;*/
-    return 5;
+    return adcIn;
 }
 
 long readUltrasonicCentimeters() {

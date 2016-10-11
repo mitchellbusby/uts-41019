@@ -37,6 +37,17 @@ class IndexComponent extends Component {
       return item.PeopleCount <= threshold;
     });
 
+    // Sort mechanism
+    AvailableRooms = AvailableRooms.sort((a, b) => {
+      if (a.PeopleCount < b.PeopleCount) {
+        return -1;
+      }
+      else if (a.PeopleCount > b.PeopleCount) {
+        return 1;
+      }
+      return 0;
+    }).reverse();
+
     if ( !DisplayIsOn ) {
       return (
         <section>
@@ -71,14 +82,16 @@ class IndexComponent extends Component {
     // Update state from within here...
     // understanding can be exploded into individual management items
     console.log(payload);
+
+    let payloadObj = JSON.parse(payload);
+
     this.setState({
-      PotentiometerValue: payload.slidingPotentiometer
+      PotentiometerValue: payloadObj.slidingPotentiometer
     });
   }
 
   _receivePayloadFromRoomData(payload) {
     // Update more state from within here...
-    console.log(payload);
     this.setState({
       AvailableRooms: payload.AvailableRooms
     });

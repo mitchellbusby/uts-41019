@@ -13,10 +13,12 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 server.listen(3003);
 
-var serialport = require('serialport');
-var port = new SerialPort('/dev/tty-usbserial1');
-var ReadLine = SerialPort.parsers.ReadLine;
-var parser = port.pipe(new ReadLine());
+var SerialPort = require('serialport');
+var serial = new SerialPort('/dev/cu.usbmodem1411', {baudrate: 9600, parser: SerialPort.parsers.readline("\n")});
+/*var ReadLine = SerialPort.parsers.readline;
+var parser = port.pipe(ReadLine({delimiter: '\n'}));*/
+
+serial.on('open', () => console.log('opened!'));
 
 import getFreeRooms from './freeRooms';
 
@@ -53,9 +55,12 @@ io.on('connection', function(socket) {
     });
   }, 8000);
 
-  port.on('data', data => {
+  serial.on('data', data => {
     console.log(data);
+    console.log(data['slidingPotentiometer']);
+    socket.emit('send:arduino', data);
   });
+
 });
 
 app.set('layout');
