@@ -20,7 +20,8 @@ class IndexComponent extends Component {
         ButtonIsPressed: props.ButtonIsPressed,
         ButtonWasPressed: 0,
         SortMechanism: props.SortMechanism,
-        CurrentPage: 1,
+        CurrentView: props.CurrentView,
+        ProximityValue: props.ProximityValue,
     };
   }
 
@@ -35,8 +36,9 @@ class IndexComponent extends Component {
     // TODO:
     // Filter available rooms in here! and then skip to
     // the current page
+    let { CurrentView } = this.state;
 
-    if (CurrentPage == 1) {
+    if (CurrentView == 1) {
       return (
         <IntroScreenComponent />
       );
@@ -112,6 +114,7 @@ class IndexComponent extends Component {
     this.setState({
       PotentiometerValue: payloadObj.slidingPotentiometer,
       ButtonIsPressed: payloadObj.sortingButton,
+      ProximityValue: payloadObj.ultrasonicRanger,
     });
 
     this._switchButtonState();
@@ -158,6 +161,8 @@ IndexComponent.defaultProps = {
   PotentiometerValue: 0,
   ButtonIsPressed: 0,
   SortMechanism: 0,
+  ProximityValue: 0,
+  CurrentView: 0,
 };
 
 export default IndexComponent;
