@@ -13,6 +13,11 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 server.listen(3003);
 
+var serialport = require('serialport');
+var port = new SerialPort('/dev/tty-usbserial1');
+var ReadLine = SerialPort.parsers.ReadLine;
+var parser = port.pipe(new ReadLine());
+
 import getFreeRooms from './freeRooms';
 
 io.on('connection', function(socket) {
@@ -47,6 +52,10 @@ io.on('connection', function(socket) {
       slidingPotentiometer: 400
     });
   }, 8000);
+
+  port.on('data', data => {
+    console.log(data);
+  });
 });
 
 app.set('layout');
