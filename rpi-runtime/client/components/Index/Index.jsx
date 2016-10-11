@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 var socket = require('socket.io-client')('http://localhost:3003');
 
 import RoomComponent from '../Room/Room';
+import IntroScreenComponent from '../IntroScreen/IntroScreen';
 
 import { mapPotentiometerToPeopleThreshold } from '../../utils/Mappings';
 
@@ -19,6 +20,7 @@ class IndexComponent extends Component {
         ButtonIsPressed: props.ButtonIsPressed,
         ButtonWasPressed: 0,
         SortMechanism: props.SortMechanism,
+        CurrentPage: 1,
     };
   }
 
@@ -33,6 +35,12 @@ class IndexComponent extends Component {
     // TODO:
     // Filter available rooms in here! and then skip to
     // the current page
+
+    if (CurrentPage == 1) {
+      return (
+        <IntroScreenComponent />
+      );
+    }
 
     let threshold = mapPotentiometerToPeopleThreshold(PotentiometerValue);
 

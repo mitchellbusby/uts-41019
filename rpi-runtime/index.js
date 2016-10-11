@@ -18,7 +18,8 @@ var serial = new SerialPort('/dev/cu.usbmodem1411', {baudrate: 9600, parser: Ser
 /*var ReadLine = SerialPort.parsers.readline;
 var parser = port.pipe(ReadLine({delimiter: '\n'}));*/
 
-serial.on('open', () => console.log('opened!'));
+serial.on('open', () => console.log('Connected to Arduino.'));
+serial.on('error', () => console.log('Error trying to connect to Arduino. Will gracefully degrade.'));
 
 import getFreeRooms from './freeRooms';
 
