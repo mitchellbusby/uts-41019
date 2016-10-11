@@ -32,7 +32,8 @@ io.on('connection', function(socket) {
       .map(item => { return {
         Temperature: '23C',
         RoomName: item.location,
-        TimeFree: item.free_for,
+        // TODO - use real data
+        TimeFree: Math.floor(Math.random() * (8 - 1)) + 1,
         // TODO - Use real data
         PeopleCount: Math.floor(Math.random() * (30 - 1)) + 1,
         Rank: 'Best'
@@ -57,7 +58,6 @@ io.on('connection', function(socket) {
 
   serial.on('data', data => {
     console.log(data);
-    console.log(data['slidingPotentiometer']);
     socket.emit('send:arduino', data);
   });
 
