@@ -3,24 +3,10 @@ body {
 }
 
 ul.rooms {
-  width: 85%;
+  width: 93vw;
   padding-left: 2%;
   padding-right: 2%;
 }
-
-.indicator {
-  width: 10%;
-  background-color: grey;
-  height: 95vh;
-  padding: 0;
-}
-
-ul.rooms, .indicator {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 0;
-}
-
 
 .roomComponent {
   height: 23vh;

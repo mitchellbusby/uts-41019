@@ -13,26 +13,38 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 server.listen(3003);
 
+import getFreeRooms from './freeRooms';
+
 io.on('connection', function(socket) {
   setTimeout(() => {
-    socket.emit('send:roomdata', {
-      AvailableRooms: [{PeopleCount: 30, 
+    let freeRoomsPromise = getFreeRooms();
+    freeRoomsPromise.then(result => {
+      console.log(result);
+      let freeRoomsInB11 = result
+      .filter(x => x.location.indexOf('CB11') !== -1)
+      .map(item => { return {
         Temperature: '23C',
-        RoomName: 'CB11.04.11',
-        Rank: 'Best',
-        TimeFree: 30}, {
-          PeopleCount: 4,
-          Temperature: '26C',
-          RoomName: 'CB11.07.134',
-        }]
+        RoomName: item.location,
+        TimeFree: item.free_for,
+        // TODO - Use real data
+        PeopleCount: Math.floor(Math.random() * (30 - 1)) + 1,
+        Rank: 'Best'
+      }});
+
+      socket.emit('send:roomdata', {
+        AvailableRooms: freeRoomsInB11
+      });
+
     });
+
     socket.emit('send:arduino', {
-      slidingPotentiometer: 100
+      slidingPotentiometer: 1700
     });
+
   }, 3000);
   setTimeout(() => {
     socket.emit('send:arduino', {
-      slidingPotentiometer: 1700
+      slidingPotentiometer: 400
     });
   }, 8000);
 });

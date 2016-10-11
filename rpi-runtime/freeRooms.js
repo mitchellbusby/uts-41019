@@ -39,7 +39,7 @@ async function getFreeRooms() {
 
     let freeRooms = await db.all(QUERY)
 
-    console.log(freeRooms)
+    return freeRooms;
 }
 
 export default getFreeRooms
