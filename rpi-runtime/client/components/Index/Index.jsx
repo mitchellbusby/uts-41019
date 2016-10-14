@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 var socket = require('socket.io-client')('http://localhost:3003');
 
 import RoomComponent from '../Room/Room';
+import IntroScreenComponent from '../IntroScreen/IntroScreen';
 
 import { mapPotentiometerToPeopleThreshold } from '../../utils/Mappings';
 
@@ -16,6 +17,11 @@ class IndexComponent extends Component {
         AvailableRooms: props.AvailableRooms,
         DisplayIsOn: props.DisplayIsOn,
         PotentiometerValue: props.PotentiometerValue,
+        ButtonIsPressed: props.ButtonIsPressed,
+        ButtonWasPressed: 0,
+        SortMechanism: props.SortMechanism,
+        CurrentView: props.CurrentView,
+        ProximityValue: props.ProximityValue,
     };
   }
 
@@ -26,13 +32,45 @@ class IndexComponent extends Component {
   }
 
   render() {
-    let { AvailableRooms, DisplayIsOn, PotentiometerValue } = this.state;
+    let { AvailableRooms, DisplayIsOn, PotentiometerValue, SortMechanism, ButtonIsPressed, ButtonWasPressed } = this.state;
+    // TODO:
+    // Filter available rooms in here! and then skip to
+    // the current page
+    let { CurrentView } = this.state;
+
+    if (CurrentView == 1) {
+      return (
+        <IntroScreenComponent />
+      );
+    }
 
     let threshold = mapPotentiometerToPeopleThreshold(PotentiometerValue);
 
     AvailableRooms = AvailableRooms.filter(item => {
       return item.PeopleCount <= threshold;
     });
+
+    // Sort mechanism
+    AvailableRooms = AvailableRooms.sort((a, b) => {
+      if (SortMechanism === 0) {
+        if (a.PeopleCount < b.PeopleCount) {
+          return -1;
+        }
+        else if (a.PeopleCount > b.PeopleCount) {
+          return 1;
+        }
+        return 0;
+      }
+      else {
+        if (a.TimeFree < b.TimeFree) {
+          return -1;
+        }
+        else if (a.TimeFree > b.TimeFree) {
+          return 1;
+        }
+        return 0;
+      }
+    }).reverse();
 
     if ( !DisplayIsOn ) {
       return (
@@ -53,6 +91,7 @@ class IndexComponent extends Component {
 
     return (
           <section>
+            <div className={'topStatusBar'}>Sorting mechanism: { SortMechanism === 0 ? 'By people count' : 'By time free' }</div>
             <h1>Free rooms in B11</h1>
             <h2>sorted by: busyness <span style={{"color":"grey"}}>/ time free</span></h2>
             <ul className={'rooms'}>
@@ -60,6 +99,9 @@ class IndexComponent extends Component {
                 return <RoomComponent key={index} {...item} />
               })}
             </ul>
+              <div className={'indicator'}>
+              </div>
+              <div className={'bottomStatusBar'}> Scroll | Filter | Sort </div>
           </section>
     );
   }
@@ -68,17 +110,44 @@ class IndexComponent extends Component {
     // Update state from within here...
     // understanding can be exploded into individual management items
     console.log(payload);
+
+    let payloadObj = JSON.parse(payload);
+
     this.setState({
-      PotentiometerValue: payload.slidingPotentiometer
+      PotentiometerValue: payloadObj.slidingPotentiometer,
+      ButtonIsPressed: payloadObj.sortingButton,
+      ProximityValue: payloadObj.ultrasonicRanger,
     });
+
+    this._switchButtonState();
   }
 
   _receivePayloadFromRoomData(payload) {
     // Update more state from within here...
-    console.log(payload);
     this.setState({
       AvailableRooms: payload.AvailableRooms
     });
+  }
+
+  _switchButtonState() {
+    if (this.state.ButtonIsPressed == 1 && this.state.ButtonWasPressed == 0) {
+      this.setState({ButtonWasPressed: 1});
+    }
+    else if (this.state.ButtonIsPressed == 0 && this.state.ButtonWasPressed == 1) {
+      // Change the sort mechanism!!
+      this.setState({ButtonWasPressed: 0});
+      this._toggleSort();
+    }
+  }
+
+  _toggleSort() {
+    // Changes the sort mechanism
+    if (this.state.SortMechanism == 0) {
+      this.setState({SortMechanism: 1});
+    }
+    else {
+      this.setState({SortMechanism: 0});
+    }
   }
 }
 
@@ -92,6 +161,10 @@ IndexComponent.defaultProps = {
   AvailableRooms: [],
   CurrentPagePosition: 0,
   PotentiometerValue: 0,
+  ButtonIsPressed: 0,
+  SortMechanism: 0,
+  ProximityValue: 0,
+  CurrentView: 0,
 };
 
 export default IndexComponent;

@@ -13,6 +13,14 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 server.listen(3003);
 
+var SerialPort = require('serialport');
+var serial = new SerialPort('/dev/cu.usbmodem1411', {baudrate: 9600, parser: SerialPort.parsers.readline("\n")});
+/*var ReadLine = SerialPort.parsers.readline;
+var parser = port.pipe(ReadLine({delimiter: '\n'}));*/
+
+serial.on('open', () => console.log('Connected to Arduino.'));
+serial.on('error', () => console.log('Error trying to connect to Arduino. Will gracefully degrade.'));
+
 import getFreeRooms from './freeRooms';
 
 io.on('connection', function(socket) {
@@ -25,7 +33,8 @@ io.on('connection', function(socket) {
       .map(item => { return {
         Temperature: '23C',
         RoomName: item.location,
-        TimeFree: item.free_for,
+        // TODO - use real data
+        TimeFree: Math.floor(Math.random() * (8 - 1)) + 1,
         // TODO - Use real data
         PeopleCount: Math.floor(Math.random() * (30 - 1)) + 1
       }});
@@ -46,6 +55,12 @@ io.on('connection', function(socket) {
       slidingPotentiometer: 400
     });
   }, 8000);
+
+  serial.on('data', data => {
+    console.log(data);
+    socket.emit('send:arduino', data);
+  });
+
 });
 
 app.set('layout');

@@ -45,6 +45,7 @@
     "express-ejs-layouts": "2.0.0",
     "react": "0.14.6",
     "react-dom": "0.14.6",
+    "serialport": "4.0.3",
     "socket.io": "1.4.8",
     "socket.io-client": "1.4.8",
     "sqlite": "2.2.0",

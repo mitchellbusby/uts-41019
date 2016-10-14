@@ -44,3 +44,30 @@ ul.rooms {
     color: #626262;
   }
 }
+
+li.roomComponent:first-child {
+  padding-top: 5em;
+}
+
+.topStatusBar {
+  position: fixed;
+  height: 5em;
+  width: 100%;
+  background-color: #e6e6e6;
+  line-height: 5em;
+  text-align: center;
+}
+
+.bottomStatusBar {
+  position: fixed;
+  background-color: #e6e6e6;
+  bottom: 0;
+  width: 100%;
+  line-height: 5em;
+  text-align: center;
+  height: 5em;
+}
+
+.introScreenComponent {
+  text-align: center;
+}

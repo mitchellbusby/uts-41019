@@ -11,7 +11,6 @@ const mapPotentiometerToPeopleThreshold = function(potentiometerValue) {
     people_threshold = 20
   else
     people_threshold = 1000
-  console.log(people_threshold);
   return people_threshold;
 }
 
