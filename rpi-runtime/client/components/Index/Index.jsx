@@ -27,9 +27,6 @@ class IndexComponent extends Component {
 
   render() {
     let { AvailableRooms, DisplayIsOn, PotentiometerValue } = this.state;
-    // TODO:
-    // Filter available rooms in here! and then skip to
-    // the current page
 
     let threshold = mapPotentiometerToPeopleThreshold(PotentiometerValue);
 
@@ -55,15 +52,15 @@ class IndexComponent extends Component {
     }
 
     return (
-      <section>
-          <ul className={'rooms'}>
-            { AvailableRooms.map((item,index) => {
-              return <RoomComponent key={index} {...item} />
-            })}
-          </ul>
-          <div className={'indicator'}>
-          </div>
-      </section>
+          <section>
+            <h1>Free rooms in B11</h1>
+            <h2>sorted by: busyness <span style={{"color":"grey"}}>/ time free</span></h2>
+            <ul className={'rooms'}>
+              { AvailableRooms.map((item, index) => {
+                return <RoomComponent key={index} {...item} />
+              })}
+            </ul>
+          </section>
     );
   }
 

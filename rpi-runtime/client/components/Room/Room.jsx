@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 
 class RoomComponent extends Component {
   render() {
-    let { RoomName, PeopleCount, TimeFree, Temperature, Rank } = this.props;
+    let { RoomName, PeopleCount, TimeFree, Temperature } = this.props;
 
     // TODO: better logic for this conversion
-    let timeFreePrettyPrint =  `${ Math.floor(TimeFree / 60) } hours free`;
+    let timeFreePrettyPrint =  `free for ${ Math.floor(TimeFree / 60) } hours`;
 
     return (
         <li className={'roomComponent'}>
-          <h3>{ RoomName }</h3>
+          <h2>{ RoomName }</h2>
           <p>
-            <span>{ PeopleCount } people&nbsp;|&nbsp;</span>
+            <span>{ PeopleCount } people there currently &nbsp;|&nbsp;</span>
             <span>{timeFreePrettyPrint}&nbsp;|&nbsp;</span>
-            <span>{ Temperature }</span>
+            <span>{ Temperature } degrees</span>
           </p>
-          <p>{ Rank }</p>
+            <hr />
         </li>
       )
   }
