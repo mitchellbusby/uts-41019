@@ -5,6 +5,7 @@ var socket = require('socket.io-client')('http://localhost:3003');
 import RoomComponent from '../Room/Room';
 import SortComponent from '../Sort/Sort'
 import IntroScreenComponent from '../IntroScreen/IntroScreen';
+import BlankScreenComponent from '../BlankScreen/BlankScreenComponent';
 
 import { mapPotentiometerToPeopleThreshold } from '../../utils/Mappings';
 
@@ -38,9 +39,15 @@ class IndexComponent extends Component {
     // the current page
     let { CurrentView } = this.state;
 
+    if (CurrentView == 0) {
+      return (
+        <BlankScreenComponent />
+      );
+    }
+
     if (CurrentView == 1) {
       return (
-        <IntroScreenComponent />
+        <IntroScreenComponent setView={this._setCurrentView.bind(this)} />
       );
     }
 
@@ -83,8 +90,10 @@ class IndexComponent extends Component {
 
     if (AvailableRooms.length === 0) {
       return (
-        <section className={'index-row'}>
-          No rooms available that match your criteria...
+        <section>
+          <h1>Free rooms in B11</h1>
+          <SortComponent sort={SortMechanism} setSort={this._setSort.bind(this)}/>
+          <p>No rooms currently available that match your criteria...</p>
         </section>
       );
     }
@@ -146,6 +155,10 @@ class IndexComponent extends Component {
   _setSort(useBusyness) {
     this.setState({SortMechanism: useBusyness});
   }
+
+  _setCurrentView(viewIndex) {
+    this.setState({CurrentView: viewIndex});
+  }
 }
 
 /*IndexComponent.props = {
@@ -160,7 +173,7 @@ IndexComponent.defaultProps = {
   ButtonIsPressed: 0,
   SortMechanism: false,
   ProximityValue: 0,
-  CurrentView: 0,
+  CurrentView: 1,
 };
 
 export default IndexComponent;
