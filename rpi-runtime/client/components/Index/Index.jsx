@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 var socket = require('socket.io-client')('http://localhost:3003');
 
 import RoomComponent from '../Room/Room';
+import SortComponent from '../Sort/Sort'
 import IntroScreenComponent from '../IntroScreen/IntroScreen';
 
 import { mapPotentiometerToPeopleThreshold } from '../../utils/Mappings';
@@ -91,17 +92,13 @@ class IndexComponent extends Component {
 
     return (
           <section>
-            <div className={'topStatusBar'}>Sorting mechanism: { SortMechanism === 0 ? 'By people count' : 'By time free' }</div>
             <h1>Free rooms in B11</h1>
-            <h2>sorted by: busyness <span style={{"color":"grey"}}>/ time free</span></h2>
+            <SortComponent sort={SortMechanism} toggleSort={this._toggleSort.bind(this)}/>
             <ul className={'rooms'}>
               { AvailableRooms.map((item, index) => {
                 return <RoomComponent key={index} {...item} />
               })}
             </ul>
-              <div className={'indicator'}>
-              </div>
-              <div className={'bottomStatusBar'}> Scroll | Filter | Sort </div>
           </section>
     );
   }
@@ -142,12 +139,8 @@ class IndexComponent extends Component {
 
   _toggleSort() {
     // Changes the sort mechanism
-    if (this.state.SortMechanism == 0) {
-      this.setState({SortMechanism: 1});
-    }
-    else {
-      this.setState({SortMechanism: 0});
-    }
+      console.log("Sort toggled")
+    this.setState({SortMechanism: !this.state.SortMechanism});
   }
 }
 
@@ -162,7 +155,7 @@ IndexComponent.defaultProps = {
   CurrentPagePosition: 0,
   PotentiometerValue: 0,
   ButtonIsPressed: 0,
-  SortMechanism: 0,
+  SortMechanism: false,
   ProximityValue: 0,
   CurrentView: 0,
 };

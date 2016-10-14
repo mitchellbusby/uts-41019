@@ -71,3 +71,18 @@ li.roomComponent:first-child {
 .introScreenComponent {
   text-align: center;
 }
+
+h2.sort {
+
+  .not-selected {
+    color: grey
+  }
+
+  .selected, .not-selected {
+    cursor: pointer;
+  }
+
+  .selected {
+    color: black
+  }
+}
