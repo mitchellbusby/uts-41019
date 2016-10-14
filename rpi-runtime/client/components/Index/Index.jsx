@@ -53,7 +53,7 @@ class IndexComponent extends Component {
 
     // Sort mechanism
     AvailableRooms = AvailableRooms.sort((a, b) => {
-      if (SortMechanism === 0) {
+      if (SortMechanism) {
         if (a.PeopleCount < b.PeopleCount) {
           return -1;
         }
@@ -93,7 +93,7 @@ class IndexComponent extends Component {
     return (
           <section>
             <h1>Free rooms in B11</h1>
-            <SortComponent sort={SortMechanism} toggleSort={this._toggleSort.bind(this)}/>
+            <SortComponent sort={SortMechanism} setSort={this._setSort.bind(this)}/>
             <ul className={'rooms'}>
               { AvailableRooms.map((item, index) => {
                 return <RoomComponent key={index} {...item} />
@@ -141,6 +141,11 @@ class IndexComponent extends Component {
     // Changes the sort mechanism
       console.log("Sort toggled")
     this.setState({SortMechanism: !this.state.SortMechanism});
+  }
+
+
+  _setSort(useBusyness) {
+    this.setState({SortMechanism: useBusyness});
   }
 }
 
