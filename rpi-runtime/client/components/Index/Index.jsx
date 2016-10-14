@@ -14,7 +14,6 @@ class IndexComponent extends Component {
     super(props);
 
     this.state = {
-        CurrentPagePosition: props.CurrentPagePosition,
         AvailableRooms: props.AvailableRooms,
         DisplayIsOn: props.DisplayIsOn,
         PotentiometerValue: props.PotentiometerValue,
@@ -157,7 +156,6 @@ IndexComponent.defaultProps = {
   items: [],
   DisplayIsOn: true,
   AvailableRooms: [],
-  CurrentPagePosition: 0,
   PotentiometerValue: 0,
   ButtonIsPressed: 0,
   SortMechanism: false,
