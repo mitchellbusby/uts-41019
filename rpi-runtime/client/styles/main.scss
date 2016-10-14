@@ -1,21 +1,46 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: "Helvetica Neue", serif;
 }
 
+section {
+  margin: 40px 70px 0 70px;
+}
+
+h1 {
+  font-size: 3em;
+}
+
 ul.rooms {
-  width: 93vw;
-  padding-left: 2%;
-  padding-right: 2%;
+  width: 100%;
+  padding: 20px 0 40px;
 }
 
 .roomComponent {
-  height: 23vh;
-  margin-bottom: 1vh;
-  background-color: #FEFFC3;
   list-style-type: none;
-  padding: 1.5em;
+  padding: 12px 0 0;
+
+  hr {
+    margin-top: 12px;
+  }
+
+  &:last-child hr {
+    display: none;
+  }
 
   p {
+    margin-top: 5px;
     color: #626262;
   }
 }
@@ -45,4 +70,19 @@ li.roomComponent:first-child {
 
 .introScreenComponent {
   text-align: center;
+}
+
+h2.sort {
+
+  .not-selected {
+    color: grey
+  }
+
+  .selected, .not-selected {
+    cursor: pointer;
+  }
+
+  .selected {
+    color: black
+  }
 }

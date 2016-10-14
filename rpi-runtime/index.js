@@ -36,8 +36,7 @@ io.on('connection', function(socket) {
         // TODO - use real data
         TimeFree: Math.floor(Math.random() * (8 - 1)) + 1,
         // TODO - Use real data
-        PeopleCount: Math.floor(Math.random() * (30 - 1)) + 1,
-        Rank: 'Best'
+        PeopleCount: Math.floor(Math.random() * (30 - 1)) + 1
       }});
 
       socket.emit('send:roomdata', {
