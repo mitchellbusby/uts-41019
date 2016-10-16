@@ -23,6 +23,7 @@ class IndexComponent extends Component {
         SortMechanism: props.SortMechanism,
         CurrentView: props.CurrentView,
         ProximityValue: props.ProximityValue,
+        PendingSleep: false
     };
   }
 
@@ -125,6 +126,17 @@ class IndexComponent extends Component {
     });
 
     this._switchButtonState();
+
+    if (payloadObj.ultrasonicRanger < 50 && this.state.CurrentView === 0) {
+      this.setState({
+        CurrentView: 1
+      });
+    }
+    if (payloadObj.ultrasonicRanger >= 50 && this.state.CurrentView !== 0 && !this.state.PendingSleep) {
+      this.setState({PendingSleep: true});
+      // Check in five seconds
+      setTimeout(() => this._checkAndScreenOff(), 5000)
+    }
   }
 
   _receivePayloadFromRoomData(payload) {
@@ -147,7 +159,7 @@ class IndexComponent extends Component {
 
   _toggleSort() {
     // Changes the sort mechanism
-      console.log("Sort toggled")
+      console.log("Sort toggled");
     this.setState({SortMechanism: !this.state.SortMechanism});
   }
 
@@ -158,6 +170,16 @@ class IndexComponent extends Component {
 
   _setCurrentView(viewIndex) {
     this.setState({CurrentView: viewIndex});
+  }
+
+  _checkAndScreenOff() {
+    console.log("Checking if screen should be turned off NOW");
+    if (this.state.ProximityValue >= 50) {
+      // Sleep the thing
+      console.log("Turning off screen now");
+      this.setState({CurrentView: 0});
+    }
+    this.setState({PendingSleep: false});
   }
 }
 
@@ -173,7 +195,7 @@ IndexComponent.defaultProps = {
   ButtonIsPressed: 0,
   SortMechanism: false,
   ProximityValue: 0,
-  CurrentView: 1,
+  CurrentView: 0,
 };
 
 export default IndexComponent;
