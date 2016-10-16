@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 html {
   box-sizing: border-box;
 }
@@ -11,7 +13,7 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", serif;
+  font-family: 'Roboto', sans-serif, "Helvetica Neue", serif;
 }
 
 section {
@@ -98,10 +100,16 @@ h2.sort {
 
 .perfect-button:hover {
   color: black;
+  border: 2px solid black;
   background-color: white;
   transition-duration: .2s;
   -webkit-transition-duration: .2s;
   -moz-transition-duration: .2s;
 }
 
+
+.blankScreenComponent {
+  text-align: center;
+  margin-top: 5em;
+}
 

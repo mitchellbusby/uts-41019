@@ -16,7 +16,6 @@ class IndexComponent extends Component {
 
     this.state = {
         AvailableRooms: props.AvailableRooms,
-        DisplayIsOn: props.DisplayIsOn,
         PotentiometerValue: props.PotentiometerValue,
         ButtonIsPressed: props.ButtonIsPressed,
         ButtonWasPressed: 0,
@@ -34,7 +33,7 @@ class IndexComponent extends Component {
   }
 
   render() {
-    let { AvailableRooms, DisplayIsOn, PotentiometerValue, SortMechanism, ButtonIsPressed, ButtonWasPressed } = this.state;
+    let { AvailableRooms, PotentiometerValue, SortMechanism, ButtonIsPressed, ButtonWasPressed } = this.state;
     // TODO:
     // Filter available rooms in here! and then skip to
     // the current page
@@ -79,14 +78,6 @@ class IndexComponent extends Component {
         return 0;
       }
     }).reverse();
-
-    if ( !DisplayIsOn ) {
-      return (
-        <section>
-          Display is off...
-        </section>
-      )
-    }
 
 
     if (AvailableRooms.length === 0) {
@@ -135,7 +126,7 @@ class IndexComponent extends Component {
     if (payloadObj.ultrasonicRanger >= 50 && this.state.CurrentView !== 0 && !this.state.PendingSleep) {
       this.setState({PendingSleep: true});
       // Check in five seconds
-      setTimeout(() => this._checkAndScreenOff(), 5000)
+      setTimeout(() => this._checkAndScreenOff(), 10 * 1000);
     }
   }
 
@@ -189,7 +180,6 @@ class IndexComponent extends Component {
 
 IndexComponent.defaultProps = {
   items: [],
-  DisplayIsOn: true,
   AvailableRooms: [],
   PotentiometerValue: 0,
   ButtonIsPressed: 0,
