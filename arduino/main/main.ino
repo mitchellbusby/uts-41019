@@ -33,8 +33,8 @@ void loop(void) {
   //Print JSON
   root.printTo(Serial);
   Serial.println("");
-  // Send data updates every quarter of a second
-  delay(250);
+  // Send data updates every micro of a second
+  delay(100);
 }
 
 int readSlidingPotentiometer() {
