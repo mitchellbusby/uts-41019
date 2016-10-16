@@ -13,7 +13,7 @@ class RoomComponent extends Component {
           <p>
             <span>{ PeopleCount } people there currently &nbsp;|&nbsp;</span>
             <span>{timeFreePrettyPrint}&nbsp;|&nbsp;</span>
-            <span>{ Temperature } degrees</span>
+            <span>{ Temperature }°C</span>
           </p>
             <hr />
         </li>

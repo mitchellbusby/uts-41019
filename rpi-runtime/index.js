@@ -31,7 +31,7 @@ io.on('connection', function(socket) {
       let freeRoomsInB11 = result
       .filter(x => x.location.indexOf('CB11') !== -1)
       .map(item => { return {
-        Temperature: '23C',
+        Temperature: '23',
         RoomName: item.location,
         // TODO - use real data
         TimeFree: Math.floor(Math.random() * (8 - 1)) + 1,
@@ -50,11 +50,6 @@ io.on('connection', function(socket) {
     });
 
   }, 3000);
-  setTimeout(() => {
-    socket.emit('send:arduino', {
-      slidingPotentiometer: 400
-    });
-  }, 8000);
 
   serial.on('data', data => {
     console.log(data);
