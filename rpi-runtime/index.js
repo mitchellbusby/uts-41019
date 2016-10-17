@@ -14,7 +14,7 @@ var io = require('socket.io')(server);
 server.listen(3003);
 
 var SerialPort = require('serialport');
-var serial = new SerialPort('/dev/cu.usbmodem1421', {baudrate: 9600, parser: SerialPort.parsers.readline("\n")});
+var serial = new SerialPort('/dev/ttyACM0', {baudrate: 9600, parser: SerialPort.parsers.readline("\n")});
 /*var ReadLine = SerialPort.parsers.readline;
 var parser = port.pipe(ReadLine({delimiter: '\n'}));*/
 
