@@ -4,7 +4,7 @@
   "description": "Simple production ready boilerplate for React, Webpack (SASS and React hot reloading), tests and coverage.",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
+    "start": "babel-node index.js",
     "test": "jest",
     "coverage": "jest --coverage",
     "dist": "cross-env NODE_ENV=production webpack -p --progress",
