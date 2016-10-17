@@ -126,7 +126,7 @@ class IndexComponent extends Component {
     if (payloadObj.ultrasonicRanger >= 50 && this.state.CurrentView !== 0 && !this.state.PendingSleep) {
       this.setState({PendingSleep: true});
       // Check in five seconds
-      setTimeout(() => this._checkAndScreenOff(), 10 * 1000);
+      setTimeout(() => this._checkAndScreenOff(), 30 * 1000);
     }
   }
 
