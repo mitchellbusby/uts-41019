@@ -8,7 +8,7 @@ class SortComponent extends Component {
         let timeClass = sort ? "not-selected" : "selected"
 
         return (
-            <h2 className="sort">sorted by: <span onClick={() => this.props.setSort(true)} className={busyClass}>busy-ness</span> <span className="not-selected">/</span> <span onClick={() => this.props.setSort(false)} className={timeClass}>time free</span></h2>
+            <h2 className="sort">sorted by: <span onClick={() => this.props.setSort(true)} className={busyClass}># of people</span> <span className="not-selected">/</span> <span onClick={() => this.props.setSort(false)} className={timeClass}>time&nbsp;free</span></h2>
         )
     }
 }
