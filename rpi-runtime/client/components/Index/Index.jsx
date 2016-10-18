@@ -87,7 +87,7 @@ class IndexComponent extends Component {
         <section>
           <h1>Free rooms in B11</h1>
           <SortComponent sort={SortMechanism} setSort={this._setSort.bind(this)}/>
-          <p>No rooms currently available that match your criteria...</p>
+          <p className={'noRooms'}>No rooms currently available that match your criteria...</p>
         </section>
       );
     }
