@@ -3,29 +3,29 @@ import db from "sqlite"
 
 const QUERY = `SELECT
   location,
-  CASE WHEN (SELECT start - strftime('%H:%M:%f', 'now', 'localtime')
+  CASE WHEN (SELECT a.id
              FROM activity_rooms ar
                JOIN activity a ON ar.activity_id = a.id
                JOIN activity_date ad ON ad.activity_id = a.id
-             WHERE ad.date = trim(strftime('%d', 'now', 'localtime'), '0') + strftime('%m', 'now', 'localtime') AND ar.room_id = r.id AND
+             WHERE ad.date = (trim(strftime('%d/', 'now', 'localtime'), '0') || ltrim(strftime('%m', 'now', 'localtime'), '0')) AND ar.room_id = r.id AND
                    start > strftime('%H:%M:%f', 'now', 'localtime')
              ORDER BY start
              LIMIT 1) IS NULL
-    THEN '24:00' - strftime('%H:%M:%f', 'now', 'localtime')
-  ELSE (SELECT start - strftime('%H:%M:%f', 'now', 'localtime')
+    THEN '23:59'
+  ELSE (SELECT strftime('%H:%M', start)
         FROM activity_rooms ar
           JOIN activity a ON ar.activity_id = a.id
           JOIN activity_date ad ON ad.activity_id = a.id
-        WHERE ad.date = trim(strftime('%d', 'now', 'localtime'), '0') + strftime('%m', 'now', 'localtime') AND ar.room_id = r.id AND
+        WHERE ad.date = (trim(strftime('%d/', 'now', 'localtime'), '0') || ltrim(strftime('%m', 'now', 'localtime'), '0')) AND ar.room_id = r.id AND
               start > strftime('%H:%M:%f', 'now', 'localtime')
         ORDER BY start
-        LIMIT 1) END free_for
+        LIMIT 1) END free_unitl
 FROM room r
 WHERE (SELECT count() class
        FROM activity_rooms ar
          JOIN activity a ON ar.activity_id = a.id
          JOIN activity_date ad ON ad.activity_id = a.id
-       WHERE ad.date = trim(strftime('%d', 'now', 'localtime'), '0') + strftime('%m', 'now', 'localtime') AND ar.room_id = r.id AND
+       WHERE ad.date = (trim(strftime('%d/', 'now', 'localtime'), '0') || ltrim(strftime('%m', 'now', 'localtime'), '0')) AND ar.room_id = r.id AND
              start <= strftime('%H:%M:%f', 'now', 'localtime') AND end > strftime('%H:%M:%f', 'now', 'localtime')) = 0`
 
 function conn() {
