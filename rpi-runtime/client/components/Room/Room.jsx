@@ -5,7 +5,7 @@ class RoomComponent extends Component {
     let { RoomName, PeopleCount, TimeFree, Temperature } = this.props;
 
     // TODO: better logic for this conversion
-    let timeFreePrettyPrint =  `free for ${ TimeFree } hours`;
+    let timeFreePrettyPrint =  `free until ${ TimeFree }`;
 
     let peopleText = PeopleCount > 1 ? 'people' : 'person';
 
@@ -13,8 +13,8 @@ class RoomComponent extends Component {
         <li className={'roomComponent'}>
           <h2>{ RoomName }</h2>
           <p>
-            <span>{ PeopleCount } {peopleText} there currently &nbsp;|&nbsp;</span>
-            <span>{timeFreePrettyPrint}&nbsp;|&nbsp;</span>
+            <span>{ PeopleCount } {peopleText} there currently&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span>{timeFreePrettyPrint}&nbsp;&nbsp;|&nbsp;&nbsp;</span>
             <span>{ Temperature }°C</span>
           </p>
             <hr />

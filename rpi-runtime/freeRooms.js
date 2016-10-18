@@ -19,7 +19,7 @@ const QUERY = `SELECT
         WHERE ad.date = (trim(strftime('%d/', 'now', 'localtime'), '0') || ltrim(strftime('%m', 'now', 'localtime'), '0')) AND ar.room_id = r.id AND
               start > strftime('%H:%M:%f', 'now', 'localtime')
         ORDER BY start
-        LIMIT 1) END free_unitl
+        LIMIT 1) END free_until
 FROM room r
 WHERE (SELECT count() class
        FROM activity_rooms ar

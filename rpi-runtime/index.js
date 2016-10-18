@@ -34,7 +34,7 @@ io.on('connection', function(socket) {
         Temperature: '23',
         RoomName: item.location,
         // TODO - use real data
-        TimeFree: Math.floor(Math.random() * (8 - 1)) + 1,
+        TimeFree: item.free_until,
         // TODO - Use real data
         PeopleCount: Math.floor(Math.random() * (30 - 1)) + 1
       }});
