@@ -58,8 +58,8 @@ class IndexComponent extends Component {
     });
 
     // Sort mechanism
-    AvailableRooms = AvailableRooms.sort((a, b) => {
-      if (SortMechanism) {
+    if (SortMechanism) {
+      AvailableRooms = AvailableRooms.sort((a, b) => {
         if (a.PeopleCount < b.PeopleCount) {
           return -1;
         }
@@ -67,8 +67,11 @@ class IndexComponent extends Component {
           return 1;
         }
         return 0;
-      }
-      else {
+      });
+    }
+    
+    else {
+      AvailableRooms = AvailableRooms.sort((a, b) => {
         if (a.TimeFree < b.TimeFree) {
           return -1;
         }
@@ -76,9 +79,8 @@ class IndexComponent extends Component {
           return 1;
         }
         return 0;
-      }
-    }).reverse();
-
+      }).reverse();
+    }
 
     if (AvailableRooms.length === 0) {
       return (
@@ -185,7 +187,7 @@ IndexComponent.defaultProps = {
   ButtonIsPressed: 0,
   SortMechanism: false,
   ProximityValue: 0,
-  CurrentView: 0,
+  CurrentView: 3,
 };
 
 export default IndexComponent;
