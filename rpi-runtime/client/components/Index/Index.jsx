@@ -69,7 +69,7 @@ class IndexComponent extends Component {
         return 0;
       });
     }
-    
+
     else {
       AvailableRooms = AvailableRooms.sort((a, b) => {
         if (a.TimeFree < b.TimeFree) {
@@ -185,7 +185,7 @@ IndexComponent.defaultProps = {
   AvailableRooms: [],
   PotentiometerValue: 0,
   ButtonIsPressed: 0,
-  SortMechanism: false,
+  SortMechanism: true,
   ProximityValue: 0,
   CurrentView: 3,
 };
