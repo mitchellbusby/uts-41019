@@ -29,18 +29,18 @@ class RoomComponent extends Component {
 
       roomNameFormatted = `Level ${roomData[1]}, Room ${roomData[2]}`; 
     }
-    
+
     let timeFreePrettyPrint =  `free until ${ TimeFree }`;
 
     let peopleText = PeopleCount > 1 ? 'people' : 'person';
 
     return (
         <li className={'roomComponent'} onClick={this.handleClick.bind(this)}>
-          <h2>{ roomNameFormatted }</h2>
+          <h2><i className={"fa fa-map-marker"} aria-hidden="true"></i> { roomNameFormatted }</h2>
           <p>
-            <span>{ PeopleCount } { peopleText } there currently&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-            <span>{ timeFreePrettyPrint }&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-            <span>{ Temperature }°C</span>
+            <span><i className={"fa fa-users"} aria-hidden="true"></i> { PeopleCount } { peopleText } there currently&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span><i className={"fa fa-clock-o"} aria-hidden="true"></i> { timeFreePrettyPrint }&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span><i className={"fa fa-sun-o"} aria-hidden="true"></i> { Temperature }°C</span>
           </p>
             <hr />
         </li>

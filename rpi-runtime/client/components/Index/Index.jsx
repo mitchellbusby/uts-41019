@@ -187,7 +187,7 @@ IndexComponent.defaultProps = {
   ButtonIsPressed: 0,
   SortMechanism: true,
   ProximityValue: 0,
-  CurrentView: 0,
+  CurrentView: 2,
 };
 
 export default IndexComponent;
