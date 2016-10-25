@@ -7,4 +7,4 @@ import { render } from 'react-dom';
 
 import Index from 'components/Index/Index';
 
-render(<Index items={[1,2,3]} />, document.getElementById('js-main'));
+render(<Index />, document.getElementById('js-main'));

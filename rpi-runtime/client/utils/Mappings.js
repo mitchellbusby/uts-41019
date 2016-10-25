@@ -1,3 +1,8 @@
+/**
+ * Maps the raw potentiometer value to a limiting number of people to a single room
+ * @param  {int} potentiometerValue [The potentiometer value, should be between 1-1024]
+ * @return {int}                    [The maximum number of people that should be in a room]
+ */
 const mapPotentiometerToPeopleThreshold = function(potentiometerValue) {
   let people_threshold = 0
 

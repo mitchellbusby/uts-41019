@@ -181,7 +181,6 @@ class IndexComponent extends Component {
 }*/
 
 IndexComponent.defaultProps = {
-  items: [],
   AvailableRooms: [],
   PotentiometerValue: 0,
   ButtonIsPressed: 0,
