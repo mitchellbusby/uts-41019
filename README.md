@@ -8,11 +8,15 @@ We used an Arduino connected to the Raspberry Pi via a serial port, and a Grove 
 
 ## Quick guide
 
+Example setup of the system:
+
+![Example setup](example_setup.jpg)
+
 The device will display a "display is off" message till it detects an object closer than 50cm in front of the ultrasonic ranger sensor. Once you're in range, it'll show a small splashscreen you need to tap "okay" to go through to the main screen.
 
 Currently available rooms will be displayed and you'll be able to change sort mechanisms either using the touchscreen or the button.
 
-Room availability is filtered using the sliding potentiometer - this data is currently faked since it's not available through the UTS API yet.
+Room availability is filtered using the sliding potentiometer; . The people count and temperature data is currently faked since it's not steadily available through the UTS API yet.
 
 ##Arduino
 
@@ -69,10 +73,3 @@ $ npm start
 Then go to http://localhost:3001
 
 *Note: we assume that the Arduino is connected to a certain serial port on the Raspberry Pi - you'll need to change the value in `index.js` to reflect this.*
-
-## Calibrating your screen
-**TODO**
-
-- Build calibration tool from source and use it
-- Swap around the coordinates correctly
-- Restart
