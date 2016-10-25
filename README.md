@@ -41,9 +41,9 @@ You will also need the following hardware attached to the Arduino:
 
 Sensor connections for each sensor to the respective port on the base shield:
 
-D7 - Grove Button
-A0 - Ultrasonic Ranger
-A1 - Sliding Potentiometer
+- D7 - Grove Button
+- A0 - Ultrasonic Ranger
+- A1 - Sliding Potentiometer
 
 
 ##Raspberry Pi
