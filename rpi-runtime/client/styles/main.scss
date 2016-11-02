@@ -80,7 +80,8 @@ h2.sort {
   }
 
   .selected {
-    color: black
+    color: black;
+    border-bottom: 5px solid #e73571;
   }
 }
 
