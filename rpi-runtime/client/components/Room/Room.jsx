@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 class RoomComponent extends Component {
-  
+
   constructor(props) {
     super(props);
 
     this.state = {
-      RoomFormat: 0 
+      RoomFormat: 0
     }
 
   }
@@ -25,7 +25,7 @@ class RoomComponent extends Component {
 
     let { RoomFormat } = this.state;
 
-    // Room format 0 for building style, format 1 for 
+    // Room format 0 for building style, format 1 for
 
     let roomNameFormatted;
 
@@ -36,7 +36,7 @@ class RoomComponent extends Component {
 
       let roomData = RoomName.split('.');
 
-      roomNameFormatted = `Level ${roomData[1]}, Room ${roomData[2]}`; 
+      roomNameFormatted = `Level ${roomData[1]}, Room ${roomData[2]}`;
     }
 
     let timeFreePrettyPrint =  `free until ${ TimeFree }`;
@@ -46,17 +46,15 @@ class RoomComponent extends Component {
     return (
         <li style={roomComponentStyles} className={'roomComponent'} onClick={this.handleClick.bind(this)}>
           <h2><i className={"fa fa-map-marker"} aria-hidden="true"></i> { roomNameFormatted }</h2>
-          <p>
-            <span><i className={"fa fa-users"} aria-hidden="true"></i> { PeopleCount } { peopleText } there currently&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-            <span><i className={"fa fa-clock-o"} aria-hidden="true"></i> { timeFreePrettyPrint }&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-            <span><i className={"fa fa-sun-o"} aria-hidden="true"></i> { Temperature }°C</span>
-          </p>
+          <p><i className={"fa fa-users"} aria-hidden="true"></i>&nbsp;{ PeopleCount } { peopleText } there currently</p>
+          <p><i className={"fa fa-clock-o"} aria-hidden="true"></i>&nbsp;{ timeFreePrettyPrint }</p>
+          <p><i className={"fa fa-sun-o"} aria-hidden="true"></i>&nbsp;{ Temperature }°C</p>
         </li>
       )
   }
 
   handleClick() {
-    
+
     let newRoomFormat;
 
     if (this.state.RoomFormat == 0) {
