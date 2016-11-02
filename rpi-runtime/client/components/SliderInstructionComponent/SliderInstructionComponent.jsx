@@ -27,7 +27,7 @@ function SliderInstructionComponent(props) {
                 <path d="M169.5,158.5 L385.648097,158.5" id="Line" stroke="#000000" strokeLinecap="square" fill="#000000"></path>
                 <path id="Line-decoration-1" d="M385.648097,158.5 L374.848097,155.5 L374.848097,161.5 L385.648097,158.5 Z" stroke="#000000" strokeLinecap="square" fill="#000000"></path>
                 <text id="Move-slider-to-the-r" fontFamily="Roboto" fontSize="15" font-weight="normal" fill="#626262">
-                    <tspan x="113.084229" y="196">Move slider to the right for rooms with more people</tspan>
+                    <tspan x="113.084229" y="196">Move the slider to find a room that suits you.</tspan>
                 </text>
                 <text id="Less-people" fontFamily="Roboto" fontSize="15" font-weight="normal" fill="#626262">
                     <tspan x="26.8901367" y="86">Less </tspan>
