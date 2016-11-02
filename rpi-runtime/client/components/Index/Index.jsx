@@ -37,7 +37,7 @@ class IndexComponent extends Component {
     // TODO:
     // Filter available rooms in here! and then skip to
     // the current page
-    let { CurrentView } = this.state;
+    let { CurrentView } = 2;
 
     if (CurrentView == 0) {
       return (

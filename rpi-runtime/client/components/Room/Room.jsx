@@ -12,7 +12,16 @@ class RoomComponent extends Component {
   }
 
   render() {
+
     let { RoomName, PeopleCount, TimeFree, Temperature } = this.props;
+
+    let level = RoomName.split(".")[1]
+    let opacity = 0.2 + +(level/11)
+
+    let roomComponentStyles = {
+      borderLeftColor: "rgba(25,25,112, " + opacity + ")"
+    }
+
 
     let { RoomFormat } = this.state;
 
@@ -35,14 +44,13 @@ class RoomComponent extends Component {
     let peopleText = PeopleCount > 1 ? 'people' : 'person';
 
     return (
-        <li className={'roomComponent'} onClick={this.handleClick.bind(this)}>
+        <li style={roomComponentStyles} className={'roomComponent'} onClick={this.handleClick.bind(this)}>
           <h2><i className={"fa fa-map-marker"} aria-hidden="true"></i> { roomNameFormatted }</h2>
           <p>
             <span><i className={"fa fa-users"} aria-hidden="true"></i> { PeopleCount } { peopleText } there currently&nbsp;&nbsp;|&nbsp;&nbsp;</span>
             <span><i className={"fa fa-clock-o"} aria-hidden="true"></i> { timeFreePrettyPrint }&nbsp;&nbsp;|&nbsp;&nbsp;</span>
             <span><i className={"fa fa-sun-o"} aria-hidden="true"></i> { Temperature }°C</span>
           </p>
-            <hr />
         </li>
       )
   }

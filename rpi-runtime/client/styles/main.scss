@@ -31,7 +31,12 @@ ul.rooms {
 
 .roomComponent {
   list-style-type: none;
-  padding: 12px 0 0;
+  padding: 10px 10px;
+  margin: 12px 0;
+
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 5px;
 
   hr {
     margin-top: 12px;
@@ -42,13 +47,9 @@ ul.rooms {
   }
 
   p {
-    margin-top: 1em;
+    margin-top: 0.5em;
     color: #626262;
   }
-}
-
-li.roomComponent:first-child {
-  padding-top: 1em;
 }
 
 .introScreenComponent {
