@@ -16,10 +16,10 @@ class RoomComponent extends Component {
     let { RoomName, PeopleCount, TimeFree, Temperature } = this.props;
 
     let level = RoomName.split(".")[1]
-    let opacity = 0.2 + +(level/11)
+    let opacity = 0.2 + (level/11);
 
     let roomComponentStyles = {
-      borderLeftColor: "rgba(25,25,112, " + opacity + ")"
+      borderLeftColor: "rgba(142, 234, 54, " + (opacity || 0.2) + ")"
     }
 
 
