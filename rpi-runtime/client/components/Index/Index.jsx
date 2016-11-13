@@ -26,10 +26,24 @@ class IndexComponent extends Component {
     };
   }
 
-  componentDidMount() {
-    socket.on('connect', () => console.log('connected'));
+  componentWillMount() {
+    socket.on('connect', () => console.log('Connected to socketio dev'));
     socket.on('send:arduino', this._receivePayloadFromArduino.bind(this));
     socket.on('send:roomdata', this._receivePayloadFromRoomData.bind(this));
+    // Set key handlers
+    //
+    window.onkeydown = (e) => {
+      const leftArrowCode = 37
+      const rightArrowCode = 39
+      switch (e.keyCode) {
+        case leftArrowCode:
+          this._decreaseTolerance();
+          break;
+        case rightArrowCode:
+          this._increaseTolerance();
+          break;
+      }
+    }
   }
 
   render() {
@@ -154,7 +168,6 @@ class IndexComponent extends Component {
     this.setState({SortMechanism: !this.state.SortMechanism});
   }
 
-
   _setSort(useBusyness) {
     this.setState({SortMechanism: useBusyness});
   }
@@ -172,6 +185,18 @@ class IndexComponent extends Component {
     }
     this.setState({PendingSleep: false});
   }
+
+  _increaseTolerance() {
+    if (this.state.PotentiometerValue <= 1600) {
+      this.setState({PotentiometerValue: this.state.PotentiometerValue + 100});
+    }
+  }
+  _decreaseTolerance() {
+    if (this.state.PotentiometerValue > 100) {
+      this.setState({PotentiometerValue: this.state.PotentiometerValue - 100});
+    }
+  }
+
 }
 
 /*IndexComponent.props = {
