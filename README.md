@@ -2,7 +2,7 @@
 
 ##Introduction
 
-This is the source code that drove our major project for 41019 (Prototyping Physical Interactions). In this course we designed a prototype kiosk to be placed in UTS Building 11 that allows students to find a room. 
+This is the source code that drove our major project for 41019 (Prototyping Physical Interactions). In this course we designed a prototype kiosk to be placed in UTS Building 11 that allows students to find a room.
 
 We used an Arduino connected to the Raspberry Pi via a serial port, and a Grove base shield attached to the Arduino, which read from each sensor.
 
@@ -24,7 +24,7 @@ Room availability is filtered using the sliding potentiometer; . The people coun
 
 Open in Arduino IDE, and download the following dependencies in the Arduino SDK Manager:
 
-- ArduinoJSON 
+- ArduinoJSON
 
 You will also need to download the [Ultrasonic Ranger wrapper code](https://github.com/Seeed-Studio/Grove_Ultrasonic_Ranger) and put it in your ~/Documents/Arduino/libraries folder.
 
@@ -67,9 +67,16 @@ Note: the installation of these libraries can take up to half an hour on a Raspb
 ```
 $ npm install
 $ npm install -g babel-cli
-$ npm start
+$ npm dev
 ```
 
 Then go to http://localhost:3001
 
 *Note: we assume that the Arduino is connected to a certain serial port on the Raspberry Pi - you'll need to change the value in `index.js` to reflect this.*
+
+###In production
+
+```
+$ npm run dist
+$ npm run start
+```

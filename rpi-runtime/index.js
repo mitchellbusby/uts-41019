@@ -21,7 +21,13 @@ var parser = port.pipe(ReadLine({delimiter: '\n'}));*/
 serial.on('open', () => console.log('Connected to Arduino.'));
 serial.on('error', () => console.log('Error trying to connect to Arduino. Will gracefully degrade.'));
 
-import getFreeRooms from './freeRooms';
+if (env.production === false) {
+  import getFreeRooms from './freeRooms';
+}
+else {
+  import getFreeRooms from './dist/freeRooms';
+}
+
 
 io.on('connection', function(socket) {
   setTimeout(() => {
