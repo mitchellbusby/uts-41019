@@ -34,9 +34,7 @@ class IndexComponent extends Component {
 
   render() {
     let { AvailableRooms, PotentiometerValue, SortMechanism, ButtonIsPressed, ButtonWasPressed } = this.state;
-    // TODO:
-    // Filter available rooms in here! and then skip to
-    // the current page
+
     let { CurrentView } = this.state;
 
     if (CurrentView == 0) {
@@ -186,7 +184,7 @@ IndexComponent.defaultProps = {
   ButtonIsPressed: 0,
   SortMechanism: true,
   ProximityValue: 0,
-  CurrentView: 0,
+  CurrentView: 2,
 };
 
 export default IndexComponent;

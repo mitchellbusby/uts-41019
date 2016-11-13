@@ -4,11 +4,9 @@ class RoomComponent extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       RoomFormat: 0
     }
-
   }
 
   render() {

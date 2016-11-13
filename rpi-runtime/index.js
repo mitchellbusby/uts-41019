@@ -42,28 +42,33 @@ else {
   var getFreeRooms = require('./dist/freeRooms').default;
 }
 
+var sendRoomUpdate = function(socket) {
+  let freeRoomsPromise = getFreeRooms();
+  freeRoomsPromise.then(result => {
+
+    let freeRoomsInB11 = result
+    .filter(x => x.location.indexOf('CB11') !== -1)
+    .map(item => { return {
+      Temperature: '23',
+      RoomName: item.location,
+      // TODO - use real data
+      TimeFree: item.free_until,
+      // TODO - Use real data
+      PeopleCount: Math.floor(Math.random() * (30 - 1)) + 1
+    }});
+
+    socket.emit('send:roomdata', {
+      AvailableRooms: freeRoomsInB11
+    });
+
+  });
+
+}
 
 io.on('connection', function(socket) {
   setTimeout(() => {
-    let freeRoomsPromise = getFreeRooms();
-    freeRoomsPromise.then(result => {
-      console.log(result);
-      let freeRoomsInB11 = result
-      .filter(x => x.location.indexOf('CB11') !== -1)
-      .map(item => { return {
-        Temperature: '23',
-        RoomName: item.location,
-        // TODO - use real data
-        TimeFree: item.free_until,
-        // TODO - Use real data
-        PeopleCount: Math.floor(Math.random() * (30 - 1)) + 1
-      }});
 
-      socket.emit('send:roomdata', {
-        AvailableRooms: freeRoomsInB11
-      });
-
-    });
+    sendRoomUpdate(socket);
 
     socket.emit('send:arduino', {
       slidingPotentiometer: 1700
