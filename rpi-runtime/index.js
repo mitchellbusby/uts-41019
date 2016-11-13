@@ -1,4 +1,14 @@
-'use strict';
+(function() {
+    var childProcess = require("child_process");
+    var oldSpawn = childProcess.spawn;
+    function mySpawn() {
+        console.log('spawn called');
+        console.log(arguments);
+        var result = oldSpawn.apply(this, arguments);
+        return result;
+    }
+    childProcess.spawn = mySpawn;
+})();
 
 var fs = require('fs');
 var path = require('path');
@@ -18,14 +28,18 @@ var serial = new SerialPort('/dev/ttyACM0', {baudrate: 9600, parser: SerialPort.
 /*var ReadLine = SerialPort.parsers.readline;
 var parser = port.pipe(ReadLine({delimiter: '\n'}));*/
 
+var env = {
+  production: process.env.NODE_ENV === 'production'
+};
+
 serial.on('open', () => console.log('Connected to Arduino.'));
 serial.on('error', () => console.log('Error trying to connect to Arduino. Will gracefully degrade.'));
 
 if (env.production === false) {
-  import getFreeRooms from './freeRooms';
+  var getFreeRooms = require('./freeRooms').default;
 }
 else {
-  import getFreeRooms from './dist/freeRooms';
+  var getFreeRooms = require('./dist/freeRooms').default;
 }
 
 
@@ -74,10 +88,6 @@ app.use(layouts);
 app.use('/client', express.static(path.join(process.cwd(), '/client')));
 
 app.disable('x-powered-by');
-
-var env = {
-  production: process.env.NODE_ENV === 'production'
-};
 
 if (env.production) {
   Object.assign(env, {

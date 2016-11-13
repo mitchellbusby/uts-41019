@@ -67,7 +67,7 @@ Note: the installation of these libraries can take up to half an hour on a Raspb
 ```
 $ npm install
 $ npm install -g babel-cli
-$ npm dev
+$ npm run dev
 ```
 
 Then go to http://localhost:3001
