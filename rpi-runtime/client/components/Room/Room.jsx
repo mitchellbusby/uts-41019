@@ -5,7 +5,7 @@ class RoomComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      RoomFormat: 0
+      RoomFormat: 1
     }
   }
 
@@ -27,7 +27,7 @@ class RoomComponent extends Component {
 
     let roomNameFormatted;
 
-    if (RoomFormat == 0) {
+    if (RoomFormat === 0) {
       roomNameFormatted = RoomName;
     }
     else {
@@ -52,7 +52,6 @@ class RoomComponent extends Component {
   }
 
   handleClick() {
-
     let newRoomFormat;
 
     if (this.state.RoomFormat == 0) {
@@ -65,7 +64,13 @@ class RoomComponent extends Component {
     this.setState({
       RoomFormat: newRoomFormat
     });
+  }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.RoomFormat !== nextState.RoomFormat) {
+      return true;
+    }
+    return false;
   }
 }
 
